@@ -7,6 +7,9 @@
 " Line numbers mappings
 nnoremap <F3> :set nu! rnu!<cr>
 
+let $RTP=split(&runtimepath, ',')[0]
+let $RC="$HOME/.vim/vimrc"
+
 syntax on "this activates syntax coloring 
 set noerrorbells "removes sounds
 set belloff=all "this is remove the sound beeps
@@ -143,6 +146,7 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
+"------------------------------------------------------------------------------
 "markdown-preview settings
 let g:mkdp_refresh_slow=1
 let g:mkdp_markdown_css='./github-md.css'
@@ -153,7 +157,7 @@ let g:mkdp_markdown_css='./github-md.css'
     "clear all autocommands
     :autocmd!
     "load the vimrc for latex files
-    :autocmd BufNewFile,BufRead *.tex :source ~/.texvimrc
+    :autocmd BufNewFile,BufRead *.tex :source ./.texvimrc
 
 :augroup END
 
@@ -163,10 +167,19 @@ let g:mkdp_markdown_css='./github-md.css'
     "clear all autocommands
     :autocmd!
     "load the vimrc for python files
-    :autocmd BufNewFile,BufRead *.py,*.pyw :source ~/.pyvimrc
+    :autocmd BufNewFile,BufRead *.py,*.pyw :source ./.pyvimrc
 
 :augroup END
 
+"python augroup
+:augroup haskellgroup
+
+    "clear all autocommands
+    :autocmd!
+    "load the vimrc for python files
+    :autocmd BufNewFile,BufRead *.hs :source ./.haskellvimrc
+
+:augroup END
 "------------------------------------------------------------------------------
 "Mappings
 let mapleader = ' ' " this sets the leader key to space bar
