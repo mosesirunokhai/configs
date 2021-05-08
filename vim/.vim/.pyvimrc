@@ -134,3 +134,4 @@ nnoremap <localleader>d :SlimeSend1 %debug<CR>
 
 " map <localleader>q to exit debug mode or IPython
 nnoremap <localleader>dq :SlimeSend1 exit<CR> 
+
