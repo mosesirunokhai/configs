@@ -1,0 +1,136 @@
+"localleader for python files
+let maplocalleader = ' '
+
+"------------------------------------------------------------------------------
+"commenting a line 
+nnoremap <leader>cc 0i#<esc>$
+nnoremap <leader>cx mq0x`q
+inoremap <leader>cx <esc>mq0x`qi
+inoremap <leader>cc <esc>0i#<esc>$a
+
+"------------------------------------------------------------------------------
+"Change python path for vim to pipenv environment.
+let pipenv_venv_path = system('pipenv --venv')
+if shell_error == 0
+    let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+    let $PYTHONPATH=venv_path . '/lib/python3.8/site-packages'
+    let $PATH=venv_path . '/bin:' . $PATH
+    let g:ycm_python_binary_path = venv_path . '/bin/python'
+else
+    let g:ycm_python_binary_path = 'python'
+endif
+
+"------------------------------------------------------------------------------
+"start ipython terminal when the first python file is opened
+nnoremap <localleader>ss :term<cr> source ~/.local/share/virtualenvs/ipyhton_venv-GSyM-N0f/bin/activate<cr>\ipython<cr><C-w>h 
+function IpythonTerm()
+    if len(term_list())==0
+        execute "normal! :term\<cr>"
+        let term_no = term_list()
+        call term_setsize(term_no[0], 10, 0)
+        call term_sendkeys(term_no[0], "source ~/.local/share/virtualenvs/interpreter__-chvtXAsL/bin/activate\<cr>")
+        call term_sendkeys(term_no[0], "ipython\<cr>")
+        call feedkeys("\<c-w>", "t")
+        call feedkeys("k", "t")
+"        call feedkeys("i", "t")
+    endif
+endfunction
+call IpythonTerm()
+
+"------------------------------------------------------------------------------
+"slime and ipython settitngs
+let g:slime_target = "vimterminal"
+let g:ipython_cell_delimit_cells_by = "tags"
+let g:ipython_cell_tag = "# <codecell>"
+let g:jupyter_mapkeys = 0 "no key binding using with jupyter 
+
+"------------------------------------------------------------------------------
+"DATA ANALYSIS
+"
+"importing the data-analysis libraries
+:iabbrev data_import 
+            \import numpy as np<cr>
+            \import pandas as pd<cr>
+            \import matplotlib.pyplot as plt<cr>
+            \import seaborn as sns<cr>
+            \import os<cr>
+            \import datetime<cr>
+
+"importing selenium dependencies.
+:iabbrev selenium_import
+            \from selenium import webdriver<cr>
+            \from selenium.webdriver.common.keys import Keys<cr>
+            \from selenium.webdriver.support.ui import Select<cr>
+            \from selenium.webdriver import ActionChains<cr>
+            \from selenium.webdriver.common.by import By<cr>
+            \from selenium.webdriver.support.ui import WebDriverWait<cr>
+            \from selenium.webdriver.support import expected_conditions as EC<cr>
+            \import functools
+            \import subprocess
+
+" suppressing browser during selenium section.
+:iabbrev selenium_noscreen 
+            \#flag = 0x08000000<cr>
+            \webdriver.common.service.subprocess.Popen = functools.partial(subprocess.Popen, creationflags = flag)
+
+"importing sklearn dependencies.
+:iabbrev sklearn_imports
+            \import sklearn<cr>
+
+" plotting a matplotlib chart
+:iabbrev plt_block 
+            \# Insert the plot below this line of code<cr>
+            \#plt.plot(x,y, color='',linestyle='-,--',label='',marker='o,.,*',line_width='')<cr>
+            \#plt.bar(x,y, color='',width='-,--',label='')<cr>
+            \#plt.pie(data, labels='data', explode='explode numeral list',shadow = True, startangle=90,wedgeprops = {'edgecolor':'black'},)<cr>
+            \#plt.title('')<cr>
+            \#plt.xlabel('')<cr>
+            \#plt.ylabel('')<cr>
+            \#plt.legend()<cr>
+            \#plt.tight_layout()<cr>
+            \#plt.grid(True)<cr>
+            \#plt.style.available()<cr>
+            \#plt.style.use()<cr>
+            \#plt.show()<cr>
+
+"------------------------------------------------------------------------------
+"IPYTHON
+"
+" map <localleader>r to run script
+nnoremap <localleader>r :IPythonCellRun<CR>
+
+" map <localleader>R to run script and time the execution
+nnoremap <localleader>R :IPythonCellRunTime<CR>
+
+" map <localleader>c to execute the current cell
+nnoremap <localleader><cr> :IPythonCellExecuteCell<CR>
+inoremap <localleader><cr> <esc>:IPythonCellExecuteCell<CR>
+
+" map <localleader>C to execute the current cell and jump to the next cell
+nnoremap <localleader>cj :IPythonCellExecuteCellJump<CR>
+
+" map <localleader>l to clear IPython screen
+nnoremap <localleader>l :IPythonCellClear<CR>
+
+" map <localleader>x to close all Matplotlib figure windows
+nnoremap <localleader>x :IPythonCellClose<CR>
+
+" map [c and ]c to jump to the previous and next cell header
+nnoremap [c :IPythonCellPrevCell<CR>
+nnoremap ]c :IPythonCellNextCell<CR>
+
+" map <localleader>h to send the current line or current selection to IPython
+"nmap <localleader>h <Plug>SlimeLineSend
+"xmap <localleader>h <Plug>SlimeRegionSend
+
+" map <localleader>p to run the previous command
+nnoremap <localleader>cp :IPythonCellPrevCommand<CR>
+
+" map <localleader>Q to restart ipython
+nnoremap <localleader>Q :IPythonCellRestart<CR>
+
+" map <localleader>d to start debug mode
+nnoremap <localleader>d :SlimeSend1 %debug<CR>
+
+" map <localleader>q to exit debug mode or IPython
+nnoremap <localleader>dq :SlimeSend1 exit<CR> 
