@@ -157,7 +157,7 @@ let g:mkdp_markdown_css='./github-md.css'
     "clear all autocommands
     :autocmd!
     "load the vimrc for latex files
-    :autocmd BufNewFile,BufRead *.tex :source ./.texvimrc
+    :autocmd BufNewFile,BufRead *.tex :source ~/.vim/.texvimrc
 
 :augroup END
 
@@ -167,19 +167,30 @@ let g:mkdp_markdown_css='./github-md.css'
     "clear all autocommands
     :autocmd!
     "load the vimrc for python files
-    :autocmd BufNewFile,BufRead *.py,*.pyw :source ./.pyvimrc
+    :autocmd BufNewFile,BufRead *.py,*.pyw :source ~/.vim/.pyvimrc
 
 :augroup END
 
-"python augroup
+"haskell augroup
 :augroup haskellgroup
 
     "clear all autocommands
     :autocmd!
-    "load the vimrc for python files
-    :autocmd BufNewFile,BufRead *.hs :source ./.haskellvimrc
+    "load the vimrc for haskell files
+    :autocmd BufNewFile,BufRead *.hs :source ~/.vim/.haskellvimrc
 
 :augroup END
+
+"javascript augroup
+:augroup javascriptgroup
+
+    "clear all autocommands
+    :autocmd!
+    "load the vimrc for javascript files
+    :autocmd BufNewFile,BufRead *.js :source ~/.vim/.jsvimrc
+
+:augroup END
+
 "------------------------------------------------------------------------------
 "Mappings
 let mapleader = ' ' " this sets the leader key to space bar
