@@ -228,10 +228,11 @@ inoremap <leader>cc <esc>0i"<esc>$a
 nnoremap <leader>hh :wincmd h<cr>
 nnoremap <leader>ll :wincmd l<cr>
 nnoremap <leader>kk :wincmd k<cr>
-nnoremap <leader>+ :vertical resize +10<cr>
-nnoremap <leader>- :vertical resize -10<cr>
-nnoremap <leader>-- :resize -2<cr>
-nnoremap <leader>++ :resize +2<cr>
+nnoremap <leader>jj :wincmd j<cr>
+nnoremap <leader>+ :vertical resize +5<cr>
+nnoremap <leader>- :vertical resize -5<cr>
+nnoremap <leader>-- :resize -5<cr>
+nnoremap <leader>++ :resize +5<cr>
 
 " Nerdtree mappings
 noremap <C-n> :NERDTreeToggle<cr>

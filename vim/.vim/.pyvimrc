@@ -25,13 +25,13 @@ endif
 nnoremap <localleader>ss :term<cr> source ~/.local/share/virtualenvs/ipyhton_venv-GSyM-N0f/bin/activate<cr>\ipython<cr><C-w>h 
 function IpythonTerm()
     if len(term_list())==0
-        execute "normal! :term\<cr>"
+        execute "normal! :vertical term\<cr>"
         let term_no = term_list()
-        call term_setsize(term_no[0], 10, 0)
+        call term_setsize(term_no[0], 0, 40)
         call term_sendkeys(term_no[0], "source ~/.local/share/virtualenvs/interpreter__-chvtXAsL/bin/activate\<cr>")
         call term_sendkeys(term_no[0], "ipython\<cr>")
         call feedkeys("\<c-w>", "t")
-        call feedkeys("k", "t")
+        call feedkeys("h", "t")
 "        call feedkeys("i", "t")
     endif
 endfunction
