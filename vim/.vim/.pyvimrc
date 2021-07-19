@@ -13,7 +13,11 @@ inoremap <leader>cc <esc>0i#<esc>$a
 let pipenv_venv_path = system('pipenv --venv')
 if shell_error == 0
     let venv_path = substitute(pipenv_venv_path, '\n', '', '')
-    let $PYTHONPATH=venv_path . '/lib/python3.8/site-packages'
+    if isdirectory(venv_path . '/lib/python3.6') == 1
+        let $PYTHONPATH=venv_path . '/lib/python3.6/site-packages'
+    else
+        let $PYTHONPATH=venv_path . '/lib/python3.8/site-packages'
+    endif
     let $PATH=venv_path . '/bin:' . $PATH
     let g:ycm_python_binary_path = venv_path . '/bin/python'
 else
